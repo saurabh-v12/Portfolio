@@ -43,8 +43,6 @@ unlinked (kept in the repo, out of the main navigation).
 
 Loaded from CDNs at runtime — no bundler:
 
-- [Leaflet 1.9.4](https://leafletjs.com/) — the journey map
-- [Font Awesome 6.4](https://fontawesome.com/) — icons
 - Google Fonts — Space Grotesk, Space Mono, Caveat
 
 The map's tile layer is Stadia Maps (Stamen Watercolor); on tile errors the
