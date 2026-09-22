@@ -1053,9 +1053,10 @@
             zoomControl: true
         });
 
-        // Stamen's own watercolor tiles were retired in 2023; Stadia Maps serves
-        // them now. Keyless on localhost, needs a free Stadia key on a live domain,
-        // so fall back to a keyless provider rather than render a blank map.
+        // Stadia Maps — original Stamen Watercolor tiles, no key in the URL.
+        // Auth is by domain: localhost/127.0.0.1 work by default; live domains
+        // (saurabhdiy.vercel.app etc.) are allowlisted on the Stadia dashboard.
+        // Falls back to OSM if Stadia is ever unreachable.
         const baseTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
             attribution: '© Stadia Maps, © Stamen Design, © OpenStreetMap contributors',
             maxZoom: 16
@@ -1063,13 +1064,12 @@
 
         let tileErrors = 0;
         baseTiles.on('tileerror', () => {
-            if (++tileErrors < 3) return; // tolerate the occasional dropped tile
+            if (++tileErrors < 3) return;
             baseTiles.off('tileerror');
             map.removeLayer(baseTiles);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                attribution: '© CARTO, © OpenStreetMap contributors',
-                subdomains: 'abcd',
-                maxZoom: 16
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 19
             }).addTo(map);
         });
 
