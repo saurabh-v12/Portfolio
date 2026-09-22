@@ -1,12 +1,12 @@
-# Build artifacts and cache
-gb/spray-*
-
 # Node modules
 node_modules/
 
-# MacOS
+# macOS metadata
 .DS_Store
 
 # IDE
 .vscode/
 .idea/
+
+# OS thumbnail cache
+Thumbs.db
